@@ -1,0 +1,109 @@
+<style>
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_desc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:before {
+        bottom: .5em;
+    }
+</style>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid">
+
+    <div class="card">
+        <div class="card-body">
+
+            <h3 class="text-center h3-responsive h3 my-3">
+                <i style="font-size: 1.6rem;" class="fas fa-cart-plus ml-1"></i>
+                Historial de Compras
+            </h3>
+
+
+            <table id="table_compras" class="table table-striped table-hover table-bordered" cellspacing="0"
+                width="100%">
+                <thead>
+                    <tr class="text-center">
+                        <th class="">Fecha</th>
+                        <th class="">No. Productos</th>
+                        <th class="">Proveedor</th>
+                        <th class="">Almacen</th>
+                        <th class="">Total Compra</th>
+                        <th class="">Detalles</th>
+                    </tr>
+                </thead>
+                <tbody id="table_ordenes_compra">
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+
+<script>
+    // INICIALIZAMOS LOS COMPONENTES A UTILIZAR    
+    $(document).ready(function () {
+        $('#table_compras').DataTable();
+
+
+        //CARGAMOS LOS DATOS DE LA TABLA
+        cargarOrdenesCompra();
+
+
+    });
+
+    function cargarOrdenesCompra() {
+
+        // VACIAMOS LA TABLA DE CONTENIDO
+        $("#table_ordenes_compra").empty();
+
+        $.ajax({
+            method: "POST",
+            url: "./Controllers/Compras/Compras.php",
+            data: {
+                funcion: 'consultar_historial_compras'
+            }
+        }).done(function (respuesta_servidor) {
+            // console.log(respuesta_servidor);
+            let datos_ordenes = JSON.parse(respuesta_servidor);
+            // console.log(datos_usuarios);
+
+            if (datos_ordenes.estado == "Tiene ordenes de compra") {
+
+                datos_ordenes.ordenes_compra.forEach(orden_compra => {
+
+                    let total_productos = (parseFloat(orden_compra.total_productos) * .13) + parseFloat(orden_compra.total_productos);
+
+                    $('#table_ordenes_compra').append(
+                        '<tr  class="text-center">' +
+                            '<td style="vertical-align: middle;">' + orden_compra.fecha_compra + '</td>' +
+                            '<td style="vertical-align: middle;">' + orden_compra.no_productos + '</td>' +
+                            '<td style="vertical-align: middle;">' + orden_compra.nombre_proveedor + '</td>' +
+                            '<td style="vertical-align: middle;">' + orden_compra.nombre_almacen + '</td>' +
+                        '<td style="vertical-align: middle;"><strong>$' + total_productos + '</strong></td>' +          
+                        '<td style="vertical-align: middle;">' +                 
+                            '<button title="Editar Orden de Compra" class="btn btn-primary btn-sm text-center" onclick="editarProducto(\'Views/Productos/Producto_Nuevo_Editar.php?id_producto=' + producto.id_producto + '\'); return false;"> ' +
+                                '<i class="fas fa-pencil"></i>' +
+                            '</button>' +
+                            '<button title="Eliminar Orden de Compra" class="btn btn-danger btn-sm text-center" onclick="editarProducto(\'Views/Productos/Producto_Nuevo_Editar.php?id_producto=' + producto.id_producto + '\'); return false;"> ' +
+                                '<i class="fas fa-trash"></i>' +
+                            '</button>'+                            
+                        '</td>' +                        
+                        '<tr>');
+
+                });
+
+            } else {
+                console.log('No tiene productos');
+            }
+        });
+    }
+
+</script>

@@ -1,0 +1,149 @@
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid mt-2">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <h2 class="h2-responsive text-center card-title">
+                <strong> <i style="font-size: 1.6rem;" class="fas fa-tags ml-1"></i> Categorías</strong>
+            </h2>
+
+            <button class="my-4 btn blue-gradient btn-block btn-md" title="Nueva Categoria"
+                onclick="cambiarVentana('Views/Administracion/Categorias_Nueva_Editar'); return false;">
+                <i class="fas fa-plus-circle mr-1"></i>
+                Nueva Categoria
+            </button>
+
+            <div class="container-fluid p-0 card">
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+
+                        <thead>
+                            <tr class="text-center" style="font-size: 1.8rem; font-weight: bold;">
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Estado</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="table_categorias">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+<script>
+    $(document).ready(function () {
+
+        cargarCategorias();
+
+    });
+
+    function eliminarCategoria(id_categoria) {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-warning',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: '¿Desea eliminar esta Categoria?',
+            icon: 'question',
+            confirmButtonText: 'Eliminar <i class="far fa-trash"></i> ',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar <i class="far fa-ban"></i>'
+        }).then((result) => {
+            if (result['isConfirmed']) {
+
+                $.ajax({
+                    method: "POST",
+                    url: "./Controllers/Administracion/Categorias.php",
+                    data: {
+                        funcion: 'eliminar_categoria',
+                        id_categoria: id_categoria
+                    }
+                }).done(function (respuesta_servidor) {
+                    // console.log(respuesta_servidor);
+                    let respuesta_categoria = JSON.parse(respuesta_servidor);
+
+                    if (respuesta_categoria.respuesta == 'Eliminado Correctamente') {
+                        
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Correcto!',
+                            text: 'Se ha eliminado el registro'
+                        });
+
+                        cargarCategorias();
+
+                    }
+                })
+
+            }
+        })
+    }
+
+    function editarCategoria(ventana_destino){
+        $("main").load(ventana_destino);
+    }
+
+    function cargarCategorias() {
+
+        // VACIAMOS LA TABLA DE CONTENIDO
+        $("#table_categorias").empty();
+
+        $.ajax({
+            method: "POST",
+            url: "./Controllers/Administracion/Categorias.php",
+            data: {
+                funcion: 'consultar_categorias'
+            }
+        }).done(function (respuesta_servidor) {
+            // console.log(respuesta_servidor);
+            let datos_categorias = JSON.parse(respuesta_servidor);
+            // console.log(datos_categorias);
+
+            if (datos_categorias.estado = "Tiene categorias") {
+
+                datos_categorias.categorias.forEach(categoria => {
+
+                    $("#table_categorias").append(
+                        '<tr  class="text-center" style="vertical-align: middle;">' +
+                        '<td>' + categoria.nombre_categoria + '</td>' +
+                        '<td>' + categoria.descripcion_categoria + '</td>' +
+                        '<td><span class="badge badge-success">' + categoria.estado + '</span></td>' +
+                        '<td>' +
+                        '<button class="btn btn-primary btn-sm text-center" onclick="editarCategoria(\'Views/Administracion/Categorias_Nueva_Editar.php?id_categoria=' + categoria.id_categoria + '\'); return false;"> ' +
+                        '<i class="fas fa-pencil"></i> Editar' +
+                        '</button>' +
+                        '</td>' +
+                        '<td>' +
+                        '<button class="btn btn-danger btn-sm text-center" onclick="eliminarCategoria(\'' + categoria.id_categoria + '\'); return false;">' +
+                        '<i class="fas fa-trash"></i> Eliminar ' +
+                        '</button >' +
+                        '</td>' +
+                        '<tr>');
+                });
+
+            } else {
+
+            }
+        });
+    }
+
+
+</script>

@@ -1,0 +1,255 @@
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid">
+
+    <form action="" class="card">
+
+        <h3 class="text-center h3-responsive h3 my-3">
+            <i style="font-size: 1.6rem;" class="fas fa-cart-plus ml-1"></i>
+            Nueva Compra
+        </h3>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <!-- CONTENEDOR DE BUSCAR Y TABLA DE PRODUCTOS AGREGADOS -->
+                <div class="col-12 col-lg-9">
+
+                    <p class="text-center">
+                        Ingrese el nombre del producto y luego haga clic en 'AGREGAR PRODUCTO' para cargar los datos
+                        de la compra a realizar.
+                    </p>
+
+                    <!-- FORM DE BUSQUEDA DE PRODUCTOS -->
+                    <div class="row align-items-center">
+
+                        <!-- BUSCAR -->
+                        <div class="col-12 col-md-8">
+                            <div class="md-form">
+                                <input type="search" id="producto_buscado" class="form-control mdb-autocomplete">
+                                <label for="producto_buscado" class="">Buscar Producto</label>
+                            </div>
+                        </div>
+                        <!-- BUSCAR -->
+
+                        <!-- AGREGAR PRODUCTO -->
+                        <div class="col-12 col-md-4">
+                            <button type="button" class="btn btn-md btn-primary" onclick="obtenerDatosProducto();">
+                                <i class="far fa-cart-plus"></i> Agregar Producto
+                            </button>
+                        </div>
+                        <!-- AGREGAR PRODUCTO -->
+
+                    </div>
+                    <!-- FORM DE BUSQUEDA DE PRODUCTOS -->
+
+                    <hr>
+
+                    <!-- TABLA DE LOS PRODUCTOS AGREGADOS -->
+                    <div class="table-responsive">
+
+                        <table class="table table-hover table-bordered">
+
+                            <thead class="light-blue darken-4 text-white">
+                                <tr class="text-center">
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad Comprada</th>
+                                    <th scope="col">Precio Compra</th>
+                                    <th scope="col">Precio Venta/ Precio Mayoreo</th>
+                                    <th scope="col">Subtotal</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="table_productos_agregados">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <!-- TABLA DE LOS PRODUCTOS AGREGADOS -->
+
+                </div>
+                <!-- CONTENEDOR DE BUSCAR Y TABLA DE PRODUCTOS AGREGADOS -->
+
+                <!-- CONTENEDO DE LOS DATOS DE LA COMPRA -->
+                <div class="col-12 col-lg-3">
+
+                    <h3 class="text-center text-uppercase">Datos de la compra</h3>
+                    <hr>
+
+                    <form>
+
+                        <div class="form-group">
+                            <label for="fecha_compra">Seleccione una fecha</label>
+                            <input type="date" id="fecha_compra" class="form-control">
+                        </div>
+
+                        <!-- PROVEEDOR -->
+                        <select class="mdb-select md-form" name="id_proveedor" id="id_proveedor">
+                        </select>
+                        <!-- PROVEEDOR -->
+
+                        <!-- ALMACEN -->
+                        <select class="mdb-select md-form" name="id_almacen" id="id_almacen">
+                        </select>
+                        <!-- ALMACEN -->
+
+                        <!-- DATOS DE LA VENTA -->
+                        <ul class="list-group list-unstyled ">
+
+                            <!-- SUBTOTAL -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Subtotal
+                                <span class="badge badge-pill badge-primary" id="subtotal"></span>
+                            </li>
+                            <!-- SUBTOTAL -->
+
+                            <!-- IVA -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                IVA (13%)
+                                <span class="badge badge-pill badge-warning" id="iva"></span>
+                            </li>
+                            <!-- IVA -->
+
+                            <li>
+                                <hr>
+                            </li>
+
+                            <!-- TOTAL -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Total
+                                <span class="badge badge-pill badge-success" id="total"></span>
+                            </li>
+                            <!-- TOTAL -->
+
+                        </ul>
+                        <!-- DATOS DE LA VENTA -->
+
+
+                        <button class="btn btn-lg btn-block btn-outline-success mt-3" type="button" onclick="insertarOrdenCompra();">
+                            Finalizar Compra <i class="far fa-money-check ml-1"></i>
+                        </button>
+
+
+                    </form>
+                </div>
+                <!-- CONTENEDO DE LOS DATOS DE LA COMPRA -->
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+
+    <!-- MODAL PARA AGREGAR LOS DATOS DE COMPRA -->
+    <div class="modal fade" id="modal_producto" tabindex="-1" role="dialog" aria-labelledby="modal_producto"
+        aria-hidden="true">
+
+        <!-- Change class .modal-sm to change the size of the modal -->
+        <div class="modal-dialog modal-lg" role="document">
+
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100 text-center" id="titulo_modal"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- CONTENEDOR DEL FORMULARIO PARA LA COMPRA DE PRODUCTOS -->
+                <div class="modal-body">
+                    <div class="row">
+
+                        <input type="hidden" name="id_producto" id="id_producto" value="">
+
+                        <!-- Nombre -->
+                        <div class="col-12 col-md-6">
+                            <div class="md-form">
+                                <label for="nombre_producto" class="active">Nombre</label>
+                                <input type="text" class="form-control" name="nombre_producto" id="nombre_producto"
+                                    length="50" disabled>
+                            </div>
+                        </div>
+                        <!-- Nombre -->
+
+                        <!-- Modelo -->
+                        <div class="col-12 col-md-6">
+                            <div class="md-form">
+                                <label for="modelo_producto" class="active">Modelo o Marca</label>
+                                <input type="text" class="form-control" name="modelo_producto" id="modelo_producto"
+                                    length="50" disabled>
+                            </div>
+                        </div>
+                        <!-- Modelo -->
+
+                        <!-- Stock o existencias -->
+                        <div class="col-12 col-md-6">
+                            <div class="md-form">
+                                <label for="cantidad_compra" class="active">Cantidad a Comprar</label>
+                                <input type="number" class="form-control" name="cantidad_compra" id="cantidad_compra"
+                                    length="10">
+                            </div>
+                        </div>
+                        <!-- Stock o existencias -->
+
+                        <!-- Precio de compra -->
+                        <div class="col-12 col-md-6">
+                            <div class="md-form">
+                                <label for="precio_compra" class="active">Precio de compra</label>
+                                <input type="number" class="form-control" name="precio_compra" value=""
+                                    id="precio_compra" length="10">
+                            </div>
+                        </div>
+                        <!-- Precio de compra -->
+
+                        <!-- Precio de venta -->
+                        <div class="col-12 col-md-6">
+                            <div class="md-form">
+                                <label for="precio_venta" class="active">Precio de venta</label>
+                                <input type="number" class="form-control" name="precio_venta" value="" id="precio_venta"
+                                    length="10">
+                            </div>
+                        </div>
+                        <!-- Precio de venta -->
+
+                        <!-- Precio de mayoreo -->
+                        <div class="col-12 col-md-6">
+                            <div class="md-form">
+                                <label for="precio_mayoreo" class="active">Precio de mayoreo</label>
+                                <input type="number" class="form-control" name="precio_mayoreo" value=""
+                                    id="precio_mayoreo" length="10">
+                            </div>
+                        </div>
+                        <!-- Precio de mayoreo -->
+
+                    </div>
+                </div>
+                <!-- CONTENEDOR DEL FORMULARIO PARA LA COMPRA DE PRODUCTOS -->
+
+                <!-- BOTONES DE ACCION DEL MODAL -->
+                <div class="modal-footer text-center">
+
+                    <button type="button" class="btn btn-secondary btn-md" onclick="vaciarDatosModal(); return false;"
+                        data-dismiss="modal">Cancelar</button>
+
+                    <button type="button" class="btn btn-primary btn-md"
+                        onclick="insertarCompraTemporal(); return false;">Agregar Producto</button>
+
+                </div>
+                <!-- BOTONES DE ACCION DEL MODAL -->
+
+            </div>
+        </div>
+    </div>
+    <!-- MODAL PARA AGREGAR LOS DATOS DE COMPRA -->
+
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+<!-- SCRIPT CON LAS FUNCIONES DE LA INTERFAZ -->
+<script type="text/javascript" src="/demo_ferreteria/js/compras/compras.js"></script>

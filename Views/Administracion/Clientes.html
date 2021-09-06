@@ -1,0 +1,162 @@
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid card">
+
+    <div class="card-body container-fluid pt-2 mb-2">
+
+        <h2 class="dark-text h2-responsive text-center">
+            <strong> <i style="font-size: 1.6rem;" class="fas fa-address-book ml-1"></i> Clientes</strong>
+        </h2>
+
+        <button class="my-4 btn blue-gradient btn-block btn-md" title="Nuevo"
+            onclick='nuevoCliente("Views/Administracion/Clientes_Nuevo_Editar.php");'>
+            <i class="fas fa-plus-circle mr-1"></i>
+            Nuevo Cliente
+        </button>
+
+        <p class="pb-4 d-none">
+            En el módulo NUEVA CATEGORÍA usted podrá registrar las categorías que servirán para agregar productos y
+            también podrá ver los productos que pertenecen a una categoría determinada. Además de lo antes
+            mencionado,
+            puede actualizar los datos de las categorías, realizar búsquedas de categorías o eliminarlas si así lo
+            desea.
+        </p>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+
+            <thead>
+                <tr class="text-center" style="font-size: 1.8rem; font-weight: bold;">
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+
+            <tbody id="table_clientes">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+
+<script>
+    $(document).ready(function () {
+        $('input').characterCounter();
+        $('.mdb-select').materialSelect();
+
+        cargarClientes();
+
+    });
+
+    function eliminarCliente(id_cliente) {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-warning',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            title: '¿Desea eliminar este Cliente?',
+            icon: 'question',
+            confirmButtonText: 'Eliminar <i class="far fa-trash"></i> ',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar <i class="far fa-ban"></i>'
+        }).then((result) => {
+            if (result['isConfirmed']) {
+
+                $.ajax({
+                    method: "POST",
+                    url: "./Controllers/Administracion/Clientes.php",
+                    data: {
+                        funcion: 'eliminar_cliente',
+                        id_cliente: id_cliente
+                    }
+                }).done(function (respuesta_servidor) {
+                    // console.log(respuesta_servidor);
+                    let respuesta_cliente = JSON.parse(respuesta_servidor);
+
+                    if (respuesta_cliente.respuesta == 'Eliminado Correctamente') {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Correcto!',
+                            text: 'Se ha eliminado el registro'
+                        });
+
+                        cargarClientes();
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    function editarCliente(ventana_destino) {
+        $("main").load(ventana_destino);
+    }
+
+    function nuevoCliente(ventana_destino) {
+        $("main").load(ventana_destino);
+    }
+
+    function cargarClientes() {
+
+        // VACIAMOS LA TABLA DE CONTENIDO
+        $("#table_clientes").empty();
+
+        $.ajax({
+            method: "POST",
+            url: "./Controllers/Administracion/Clientes.php",
+            data: {
+                funcion: 'consultar_clientes'
+            }
+        }).done(function (respuesta_servidor) {
+
+            // console.log(respuesta_servidor);
+            let datos_clientes = JSON.parse(respuesta_servidor);
+            // console.log(datos_categorias);
+
+            if (datos_clientes.estado = "Tiene clientes") {
+
+                datos_clientes.clientes.forEach(cliente => {
+
+                    $("#table_clientes").append(
+                        '<tr  class="text-center" style="vertical-align: middle;">' +
+                        '<td>' + cliente.nombre_cliente + '</td>' +
+                        '<td>' + cliente.correo_cliente + '</td>' +
+                        '<td><span class="badge badge-success">' + cliente.estado + '</span></td>' +
+                        '<td>' +
+                        '<button class="btn btn-primary btn-sm text-center" onclick="editarCliente(\'Views/Administracion/Clientes_Nuevo_Editar.php?id_cliente=' + cliente.id_cliente + '\'); return false;"> ' +
+                        '<i class="fas fa-pencil"></i> Editar' +
+                        '</button>' +
+                        '</td>' +
+                        '<td>' +
+                        '<button class="btn btn-danger btn-sm text-center" onclick="eliminarCliente(\'' + cliente.id_cliente + '\'); return false;">' +
+                        '<i class="fas fa-trash"></i> Eliminar ' +
+                        '</button >' +
+                        '</td>' +
+                        '<tr>');
+                });
+
+            } else {
+                console.log("dsa");
+            }
+        });
+    }
+
+
+    $("#regresar").on('click', function (e) {
+        e.preventDefault();
+        cambiarVentana('Views/Administracion/Categorias');
+    });
+</script>

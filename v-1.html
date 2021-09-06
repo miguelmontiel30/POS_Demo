@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Ferretería Demo</title>
+  <link rel="icon" href="http://demo.factury.mx/resources/images/logos/ARA.png" type="png" sizes="">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="css/all.css">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  
+  <!-- DATATABLES Bootstrap -->
+  <!-- <link rel="stylesheet" href="css/addons/datatables.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+
+  <!-- SWEETALERT -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+</head>
+
+<body class="fixed-sn white-skin">
+
+  <!-- CONTENEDOR DE SIDEBAR, NAVBAR Y BOTON FLOTANTE -->
+  <header>
+
+    <!-- SIDEBAR -->
+    <div id="slide-out" class="side-nav fixed" style="background-image: url(img/Menu/menu_background.jpg);">
+
+      <!-- CONTENEDOR DEL MENU GENERAL -->
+      <ul class="custom-scrollbar">
+
+        <!-- Logo -->
+        <li class="logo-sn waves-effect py-3">
+          <div class="text-center">
+            <a href="#" class="pl-0"><img width="50" height="50" src="http://demo.factury.mx/resources/images/logos/ARA.png"> <br> Demo Ferreteria</a>
+          </div>
+        </li>
+
+        <!-- ITEMS DE NAVEGACION -->
+        <li>
+
+          <ul class="collapsible collapsible-accordion">
+
+            <!-- ADMINISTRACION -->
+            <li>
+
+              <a class="collapsible-header waves-effect arrow-r">
+                <i class="w-fa fas fa-toolbox"></i>Administración<i class="fas fa-angle-down rotate-icon"></i>
+              </a>
+
+              <!-- CONTENEDOR GENERAL DE ITEMS DE ADMINISTRACION -->
+              <div class="collapsible-body">
+
+                <!-- LISTA DE ITEMS -->
+                <ul>
+
+                  <li>
+                    <a href="#" id="categorias" onclick="cambiarVentana('Views/Administracion/Categorias'); return false;" class="waves-effect"><i class="w-fa fas fa-tags"></i>Categorías</a>
+                  </li>
+
+                  <li>
+                    <a href="#" id="proveeedores" onclick="cambiarVentana('Views/Administracion/Proveedores'); return false;" class="waves-effect"><i class="w-fa fas fa-truck-loading"></i>Proveedores</a>
+                  </li>
+
+                  <li>
+                    <a href="#" id="clientes" onclick="cambiarVentana('Views/Administracion/Clientes'); return false;" class="waves-effect"><i class="w-fa fas fa-address-book"></i>Clientes</a>
+                  </li>
+
+                  <li>
+                    <a href="#" id="usuarios" onclick="cambiarVentana('Views/Administracion/Usuarios'); return false;" class="waves-effect"><i class="w-fa fas fa-users"></i>Usuarios</a>
+                  </li>
+
+                </ul>
+                <!-- LISTA DE ITEMS -->
+
+              </div>
+              <!-- CONTENEDOR GENERAL DE ITEMS DE ADMINISTRACION -->
+
+            </li>
+            <!-- ADMINISTRACION -->
+            
+            <!-- PRODUCTOS -->
+            <li>
+
+              <a class="collapsible-header waves-effect arrow-r">
+                <i class="w-fa fas fa-pallet"></i>Productos<i class="fas fa-angle-down rotate-icon"></i>
+              </a>
+
+              <!-- CONTENEDOR GENERAL DE ITEMS DE PRODUCTOS -->
+              <div class="collapsible-body">
+
+                <!-- LISTA DE ITEMS -->
+                <ul>
+
+                  <li>
+                    <a href="#" id="producto" onclick="cambiarVentana('Views/Productos/Productos'); return false;" class="waves-effect"><i class="w-fa fas fa-boxes"></i>Mis Productos</a>
+                  </li>
+
+                  <li>
+                    <a href="#" id="nuevo_producto" onclick="$('main').load('Views/Productos/Producto_Nuevo_Editar.php'); return false;" class="waves-effect"><i class="w-fa fas fa-scanner"></i>Nuevo Producto</a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="waves-effect"><i class="w-fa fas fa-file-invoice-dollar"></i>Más Vendidos</a>
+                  </li>
+
+                </ul>
+                <!-- LISTA DE ITEMS -->
+
+              </div>
+              <!-- CONTENEDOR GENERAL DE ITEMS DE PRODUCTOS -->
+
+            </li>
+            <!-- PRODUCTOS -->
+
+            <!-- Compras -->
+            <li>
+
+              <a class="collapsible-header waves-effect arrow-r">
+                <i class="w-fa fas fa-shopping-bag"></i>Compras<i class="fas fa-angle-down rotate-icon"></i>
+              </a>
+
+              <!-- CONTENEDOR GENERAL DE ITEMS DE COMPRAS -->
+              <div class="collapsible-body">
+
+                <!-- LISTA DE ITEMS -->
+                <ul>
+
+                  <li>
+                    <a href="#" id="nueva_compra" onclick="cambiarVentana('Views/Compras/Nueva_Compra'); return false;" class="waves-effect"><i class="w-fa fas fa-cart-plus"></i>Nueva Compra</a>
+                  </li>
+
+                  <li>
+                    <a href="#" id="historial_compras" onclick="cambiarVentana('Views/Compras/Historial_Compras'); return false;" class="waves-effect"><i class="w-fa fas fa-receipt"></i>Historial de Compras</a>
+                  </li>
+
+                </ul>
+                <!-- LISTA DE ITEMS -->
+
+              </div>
+              <!-- CONTENEDOR GENERAL DE ITEMS DE COMPRAS -->
+
+            </li>
+            <!-- Compras -->
+
+            <!-- Ventas -->
+            <li>
+
+              <a class="collapsible-header waves-effect arrow-r">
+                <i class="w-fa fas fa-hand-holding-usd"></i>Ventas<i class="fas fa-angle-down rotate-icon"></i>
+              </a>
+
+              <!-- CONTENEDOR GENERAL DE ITEMS DE Ventas -->
+              <div class="collapsible-body">
+
+                <!-- LISTA DE ITEMS -->
+                <ul>
+
+                  <li>
+                    <a href="#" id="nueva_venta" onclick="cambiarVentana('Views/Ventas/Nueva_Venta'); return false;" class="waves-effect"><i class="w-fa fas fa-hand-holding-box"></i>Nueva Venta</a>
+                  </li>
+
+                  <li>
+                    <a href="#" id="historial_ventas" onclick="cambiarVentana('Views/Ventas/Historial_Ventas'); return false;" class="waves-effect"><i class="w-fa fas fa-file-chart-line"></i>Historial de Ventas</a>
+                  </li>
+
+                </ul>
+                <!-- LISTA DE ITEMS -->
+
+              </div>
+              <!-- CONTENEDOR GENERAL DE ITEMS DE Ventas -->
+
+            </li>
+            <!-- Ventas -->
+
+            <!-- Almacenes -->
+            <li>
+
+              <a class="collapsible-header waves-effect arrow-r">
+                <i class="w-fa fas fa-warehouse"></i>Almacenes<i class="fas fa-angle-down rotate-icon"></i>
+              </a>
+
+              <!-- CONTENEDOR GENERAL DE ITEMS DE Almacenes -->
+              <div class="collapsible-body">
+
+                <!-- LISTA DE ITEMS -->
+                <ul>
+
+                  <li>
+                    <a href="#" class="waves-effect"><i class="w-fa fas fa-warehouse-alt"></i>Nuevo Almacen</a>
+                  </li>
+
+                  <li>
+                    <a href="#" class="waves-effect"><i class="w-fa fas fa-pallet"></i>Entrada a Almacen</a>
+                  </li>
+
+                </ul>
+                <!-- LISTA DE ITEMS -->
+
+              </div>
+              <!-- CONTENEDOR GENERAL DE ITEMS DE Almacenes -->
+
+            </li>
+            <!-- Almacenes -->
+
+          </ul>
+        </li>
+        <!-- ITEMS DE NAVEGACION -->
+
+      </ul>
+      <!-- CONTENEDOR DEL MENU GENERAL -->
+
+      <!-- MASCARA PARA CUANDO ABREN EL MENU -->
+      <div class="sidenav-bg mask-strong"></div>
+      <!-- MASCARA PARA CUANDO ABREN EL MENU -->
+
+    </div>
+    <!-- SIDEBAR -->
+
+    <!-- NAVBAR -->
+    <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav">
+
+      <!-- SideNav slide-out button -->
+      <div class="float-left">
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb-dn mr-auto">
+        <p>Demo Ferretería</p>
+      </div>
+
+      <div class="d-flex change-mode">
+
+        <!-- ITEMS DEL NAVBAR -->
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+
+          <!-- NOTIFICACIONES -->
+          <li class="nav-item dropdown notifications-nav">
+
+            <a class="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <span class="badge red">2</span> <i class="fas fa-bell"></i>
+              <span class="d-none d-md-inline-block">Notificaciones</span>
+            </a>
+
+            <!-- CONTENEDOR DE LA NOTIFICACIONES -->
+            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+
+              <a class="dropdown-item" href="#">
+                <p class="m-0 p-0">
+                  <i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+                  Nueva Orden de Compra Recibida al Almacén
+                </p>
+                <span class="text-muted"></span><i class="far fa-clock" aria-hidden="true"></i> 13 min</span>
+              </a>
+
+              <a class="dropdown-item d-flex flex-wrap" href="#">
+                <p class="m-0 p-0">
+                  <i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+                  Existen <strong>10</strong> productos en stock minimo.
+                </p>
+                <span class="text-muted"><i class="far fa-clock" aria-hidden="true"></i> 33 min</span>
+              </a>
+
+            </div>
+            <!-- CONTENEDOR DE LA NOTIFICACIONES -->
+
+          </li>
+          <!-- NOTIFICACIONES -->
+
+          <!-- USUARIO -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Perfil</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="#">Cerrar Sesión</a>
+              <a class="dropdown-item" href="#">Mi Cuenta</a>
+            </div>
+          </li>
+          <!-- USUARIO -->
+
+        </ul>
+        <!-- ITEMS DEL NAVBAR -->
+
+        <div class="ml-auto mb-0 mr-3 change-mode-wrapper">
+          <button class="btn btn-outline-black btn-sm" id="dark-mode">Modo Obscuro</button>
+        </div>
+
+      </div>
+
+    </nav>
+    <!-- NAVBAR -->
+
+    <!-- BOTON DE ACCIONES RAPIDAS -->
+    <div class="fixed-action-btn clearfix" style="bottom: 45px; right: 24px;">
+
+      <a class="btn-floating btn-lg red">
+        <i class="fas fa-plus"></i>
+      </a>
+
+      <ul class="list-unstyled">
+        <li title="Nuevo Almacen"><a class="btn-floating red"><i class="fas fa-warehouse"></i></a></li>
+        <li title="Nuevo Usuario"><a class="btn-floating warning-color darken-2"><i class="fas fa-user"></i></a></li>
+        <li title="Nueva Compra"><a class="btn-floating green"><i class="fas fa-cart-plus"></i></a></li>
+        <li title="Nueva Venta"><a class="btn-floating blue"><i class="fas fa-hand-holding-usd"></i></a></li>
+      </ul>
+
+    </div>
+    <!-- BOTON DE ACCIONES RAPIDAS -->
+
+  </header>
+  <!-- CONTENEDOR DE SIDEBAR, NAVBAR Y BOTON FLOTANTE -->
+
+  <!-- CONTENIDO DEL DASHBOARD Y DE LAS VENTANAS A CARGAR -->
+  <main>
+
+    <div class="container-fluid">
+
+      <!-- CONTENEDOR DE TARJETAS CON DATOS RAPIDOS DEL SISTEMA -->
+      <section class="mt-md-4 pt-md-2 mb-5 pb-4">
+
+        <!-- SECCION DE TARJETAS PRINCIPALES DE DATOS -->
+        <div class="row">
+
+          <!-- CONTENEDOR DE VENTAS MENSUALES -->
+          <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+
+            <!-- CONTENEDOR TARJETA -->
+            <div class="card card-cascade cascading-admin-card">
+
+              <!-- DATOS DE LAS VENTAS MENSUALES -->
+              <div class="admin-up">
+                <i class="far fa-money-bill-alt primary-color mr-3 z-depth-2"></i>
+                <div class="data">
+                  <p class="text-uppercase">Ventas Mensuales</p>
+                  <h4 class="font-weight-bold dark-grey-text">$246,450</h4>
+                </div>
+              </div>
+              <!-- DATOS DE LAS VENTAS MENSUALES -->
+
+              <!-- COMPARACION CON EL MES PASADO -->
+              <div class="card-body card-body-cascade">
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="card-text">
+                  Incremento comparado al mes de Octubre
+                  <strong>
+                    (25%)
+                  </strong>
+                </p>
+              </div>
+              <!-- COMPARACION CON EL MES PASADO -->
+
+            </div>
+            <!-- CONTENEDOR TARJETA -->
+
+          </div>
+          <!-- CONTENEDOR DE VENTAS MENSUALES -->
+
+          <!-- CONTENEDOR DE STOCKS MINIMOS -->
+          <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+
+            <!-- Card -->
+            <div class="card card-cascade cascading-admin-card">
+
+              <!-- Card Data -->
+              <div class="admin-up">
+                <i class="fas fa-inventory danger-color mr-3 z-depth-2"></i>
+                <div class="data">
+                  <p class="text-uppercase">Stock Minimo</p>
+                  <h4 class="font-weight-bold dark-grey-text">50</h4>
+                </div>
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body card-body-cascade">
+                <div class="progress mb-3">
+                  <div class="progress-bar red accent-2" role="progressbar" style="width: 5%" aria-valuenow="5"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="card-text">Total de los productos en stock minimo <strong>(5%)</strong></p>
+              </div>
+
+            </div>
+            <!-- Card -->
+
+          </div>
+          <!-- CONTENEDOR DE STOCKS MINIMOS -->
+
+          <!-- CONTENEDOR DE NUMEROS DE CLIENTES ASOCIADOS -->
+          <div class="col-xl-3 col-md-6 mb-md-0 mb-4">
+
+            <!-- Card -->
+            <div class="card card-cascade cascading-admin-card">
+
+              <!-- Card Data -->
+              <div class="admin-up">
+                <i class="fas fa-user-chart warning-color lighten-1 mr-3 z-depth-2"></i>
+                <div class="data">
+                  <p class="text-uppercase">Clientes Asociados</p>
+                  <h4 class="font-weight-bold dark-grey-text">35</h4>
+                </div>
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body card-body-cascade">
+                <div class="progress mb-3">
+                  <div class="progress-bar warning-color accent-2" role="progressbar" style="width: 75%"
+                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="card-text">Incremento de clientes comparado al mes de Octubre (75%)</p>
+              </div>
+
+            </div>
+            <!-- Card -->
+
+          </div>
+          <!-- CONTENEDOR DE NUMEROS DE CLIENTES ASOCIADOS -->
+
+          <!-- Grid column -->
+          <div class="col-xl-3 col-md-6 mb-0">
+
+            <!-- Card -->
+            <div class="card card-cascade cascading-admin-card">
+
+              <!-- Card Data -->
+              <div class="admin-up">
+                <i class="fas fa-pallet-alt success-color accent-2 mr-3 z-depth-2"></i>
+                <div class="data">
+                  <p class="text-uppercase">Compras del Mes</p>
+                  <h4 class="font-weight-bold dark-grey-text">2000</h4>
+                </div>
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body card-body-cascade">
+                <div class="progress mb-3">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 42%" aria-valuenow="42"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="card-text">Incremento comparado al mes de Octubre <strong>(42%)</strong></p>
+              </div>
+
+            </div>
+            <!-- Card -->
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- SECCION DE TARJETAS PRINCIPALES DE DATOS -->
+
+        <!-- SEECION DE DATOS SECUNDARIOS -->
+        <section class="row mt-4">
+
+          <!-- CONTENEDOR DE DATOS DE VENTAS DIARIAS -->
+          <div class="col-xl-3 col-md-6 mb-4">
+
+            <!-- CONTENEDOR TARJETA -->
+            <div class="card">
+
+              <!-- DATOS DE LA VENTA -->
+              <div class="row mt-3">
+
+                <!-- ICONO DE LA TARJETA -->
+                <div class="col-md-5 col-5 text-left pl-4">
+
+                  <a type="button" class="btn-floating btn-lg primary-color ml-4">
+                    <i class="far fa-hands-usd" aria-hidden="true"></i>
+                  </a>
+
+                </div>
+                <!-- ICONO DE LA TARJETA -->
+
+                <!-- TITULO Y TOTAL DE VENTA -->
+                <div class="col-md-7 col-7 text-right pr-5">
+
+                  <h5 class="ml-4 mt-4 mb-2 font-weight-bold">$4,567</h5>
+
+                  <p class="font-small grey-text">Total de Ventas de hoy</p>
+                </div>
+                <!-- TITULO Y TOTAL DE VENTA -->
+
+              </div>
+              <!-- DATOS DE LA VENTA -->
+
+            </div>
+            <!-- CONTENEDOR TARJETA -->
+
+          </div>
+          <!-- CONTENEDOR DE DATOS DE VENTAS DIARIAS -->
+
+          <!-- CONTENEDOR DE DATOS DEL ALMACEN -->
+          <div class="col-xl-3 col-md-6 mb-4">
+
+            <!-- CONTENEDOR TARJETA -->
+            <div class="card">
+
+              <!-- DATOS DEL ALMACEN -->
+              <div class="row mt-3">
+
+                <div class="col-md-5 col-5 text-left pl-4">
+                  <a type="button" class="btn-floating btn-lg red accent-2 ml-4">
+                    <i class="fas fa-warehouse" aria-hidden="true"></i>
+                  </a>
+                </div>
+
+                <div class="col-md-7 col-7 text-right pr-5">
+                  <h5 class="ml-4 mt-4 mb-2 font-weight-bold">405,567</h5>
+                  <p class="font-small grey-text">Total de Productos en almacen</p>
+                </div>
+
+              </div>
+              <!-- DATOS DEL ALMACEN -->
+
+              <!-- CONTENIDO DE ULTIMOS REGISTROS EN ALMACEN -->
+              <!-- <div class="row my-3">
+
+                <div class="col-md-7 col-7 text-left pl-4">
+                  <p class="font-small font-up ml-4 font-weight-bold">Ultimos Productos Registrados</p>
+                </div>
+
+                <div class="col-md-5 col-5 text-right pr-5">
+                  <p class="font-small grey-text">145,567</p>
+                </div>
+
+              </div> -->
+              <!-- CONTENIDO DE ULTIMOS REGISTROS EN ALMACEN -->
+
+            </div>
+            <!-- CONTENEDOR TARJETA -->
+
+          </div>
+          <!-- CONTENEDOR DE DATOS DEL ALMACEN -->
+
+          <!-- CONTENEDOR DE DATOS DE USUARIOS -->
+          <div class="col-xl-3 col-md-6 mb-4">
+
+            <!-- CONTENEDOR TARJETA -->
+            <div class="card">
+
+              <!-- Card Data -->
+              <div class="row mt-3">
+
+                <!-- ICONO DE LA TARJETA -->
+                <div class="col-md-5 col-5 text-left pl-4">
+
+                  <a type="button" class="btn-floating btn-lg warning-color ml-4">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                  </a>
+
+                </div>
+                <!-- ICONO DE LA TARJETA -->
+
+                <!-- DATOS DE LA TARJETA -->
+                <div class="col-md-7 col-7 text-right pr-5">
+
+                  <h5 class="ml-4 mt-4 mb-2 font-weight-bold">20</h5>
+                  <p class="font-small grey-text">Usuarios en el Sistema</p>
+
+                </div>
+                <!-- DATOS DE LA TARJETA -->
+
+              </div>
+              <!-- Card Data -->
+
+            </div>
+            <!-- CONTENEDOR TARJETA -->
+
+          </div>
+          <!-- CONTENEDOR DE DATOS DE USUARIOS -->
+
+          <!-- CONTENEDOR DE DATOS DE ORDENES DE COMPRA -->
+          <div class="col-xl-3 col-md-6 mb-4">
+
+            <!-- CONTENEDOR TARJETA -->
+            <div class="card">
+
+              <!-- Card Data -->
+              <div class="row mt-3">
+
+                <!-- ICONO DE LA TARJETA -->
+                <div class="col-md-5 col-5 text-left pl-4">
+
+                  <a type="button" class="btn-floating btn-lg success-color ml-4">
+                    <i class="fas fa-cart-plus" aria-hidden="true"></i>
+                  </a>
+
+                </div>
+                <!-- ICONO DE LA TARJETA -->
+
+                <!-- DATOS DE LA TARJETA -->
+                <div class="col-md-7 col-7 text-right pr-5">
+
+                  <h5 class="ml-4 mt-4 mb-2 font-weight-bold">5</h5>
+                  <p class="font-small grey-text">Ordenes de compra en proceso</p>
+
+                </div>
+                <!-- DATOS DE LA TARJETA -->
+
+              </div>
+              <!-- Card Data -->
+
+            </div>
+            <!-- CONTENEDOR TARJETA -->
+
+          </div>
+          <!-- CONTENEDOR DE DATOS DE ORDENES DE COMPRA -->
+
+        </section>
+        <!-- SEECION DE DATOS SECUNDARIOS -->
+
+      </section>
+      <!-- CONTENEDOR DE TARJETAS CON DATOS RAPIDOS DEL SISTEMA -->
+
+      <!-- CONTENEDOR DE PANEL DE PRODUCTOS MAS VENDIDOS Y GRAFICA DE VENTAS -->
+      <section class="mb-5">
+
+        <!-- Card -->
+        <div class="card card-cascade narrower">
+
+          <!-- CONTENEDOR DE LA TABLA DE LOS DATOS DE VENTA DE LOS MESES Y GRAFICA -->
+          <section class="row">
+
+            <!-- CONTENEDOR DE LOS DATOS DE LOS MESES Y SUS VENTAS -->
+            <div class="col-xl-5 col-lg-12 mr-0 pb-2">
+
+              <!-- Card image -->
+              <div class="view view-cascade gradient-card-header  primary-color">
+                <h2 class="h2-responsive mb-0 font-weight-500">Ventas Mensuales</h2>
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body card-body-cascade pb-0">
+
+                <div class="progress mb-2 mt-1">
+
+                  <div class="progress-bar warning-color" role="progressbar" style="width: 55%" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100">
+                  </div>
+
+                </div>
+
+                <!-- Text -->
+                <p class="font-small grey-text mb-4">Enero</p>
+
+                <div class="progress mb-2">
+                  <div class="progress-bar red accent-2" role="progressbar" style="width: 35%" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+
+                <!-- Text -->
+                <p class="font-small grey-text mb-4">Febrero</p>
+
+                <div class="progress mb-2">
+
+                  <div class="progress-bar primary-color" role="progressbar" style="width: 85%" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100">
+                  </div>
+
+                </div>
+
+                <!-- Text -->
+                <p class="font-small grey-text mb-4">Marzo</p>
+
+                <div class="progress mb-2">
+                  <div class="progress-bar light-blue lighten-1" role="progressbar" style="width: 70%"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <!-- Text -->
+                <p class="font-small grey-text mb-4">Abril</p>
+
+                <div class="progress mb-2">
+                  <div class="progress-bar light-blue lighten-1" role="progressbar" style="width: 70%"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <!-- Text -->
+                <p class="font-small grey-text mb-4">Mayo</p>
+
+                <div class="progress mb-2">
+                  <div class="progress-bar light-blue lighten-1" role="progressbar" style="width: 70%"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <!-- Text -->
+                <p class="font-small grey-text mb-4">Junio</p>
+
+              </div>
+              <!-- Card content -->
+
+            </div>
+            <!-- CONTENEDOR DE LOS DATOS DE LOS MESES Y SUS VENTAS -->
+
+            <!-- CONTENEDOR DE LA GRAFICA -->
+            <div class="col-xl-7 col-lg-12 mb-4 pb-2">
+
+              <!-- CONTENEDOR DE LA GRAFICA -->
+              <div class="view view-cascade gradient-card-header blue-gradient">
+
+                <canvas id="lineChart" height="240"></canvas>
+
+              </div>
+              <!-- CONTENEDOR DE LA GRAFICA -->
+
+            </div>
+            <!-- CONTENEDOR DE LA GRAFICA -->
+
+          </section>
+          <!-- CONTENEDOR DE LA TABLA DE LOS DATOS DE VENTA DE LOS MESES Y GRAFICA -->
+
+          <!-- CONTENEDOR DE LA TABLA DE PRODUCTOS MAS VENDIDOS -->
+          <section>
+
+            <!-- Top Table UI -->
+            <div class="table-ui p-2 mb-3 mx-4 mb-5">
+
+              <!-- CONTENEDOR DE FORM DE BUSQUEDA -->
+              <div class="col-xl-3 col-md-6 ml-auto">
+
+                <form class="form-inline mt-2 ml-2">
+                  <div class="form-group md-form mt-2">
+                    <input class="form-control w-100" type="text" placeholder="Busca un producto">
+                  </div>
+                  <button class="btn btn-sm btn-primary ml-2 mr-0 mb-md-0 mb-4 px-2"><i
+                      class="fas fa-search"></i></button>
+                </form>
+
+              </div>
+              <!-- CONTENEDOR DE FORM DE BUSQUEDA -->
+
+            </div>
+            <!-- Top Table UI -->
+
+            <!-- CONTENEDOR TARJETA DE LA TABLA -->
+            <div class="card card-cascade narrower z-depth-0">
+
+              <!-- TITULO DE LA TABLA -->
+              <div
+                class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-center align-items-center">
+
+                <h3 href="" class="white-text text-center my-3">Productos más vendidos.</h3>
+
+              </div>
+
+              <!-- CONTENEDOR DE LA TABLA -->
+              <div class="px-4">
+
+                <!-- CONTENEDOR RESPONSIVE DE LA TABLA -->
+                <div class="table-responsive">
+
+                  <!--Table-->
+                  <table class="table table-hover table-striped mb-0">
+
+                    <!-- Table head -->
+                    <thead>
+                      <tr class="text-center">
+                        <th></th>
+                        <th class="th-lg"><a>Producto<i class="fas fa-sort ml-1"></i></a></th>
+                        <th class="th-lg"><a>Precio Publico<i class="fas fa-sort ml-1"></i></a></th>
+                        <th class="th-lg"><a>Precio Mayoreo<i class="fas fa-sort ml-1"></i></a></th>
+                        <th class="th-lg"><a>No. Piezas Vendidas<i class="fas fa-sort ml-1"></i></a></th>
+                        <th class="th-lg"><a>Ganancias<i class="fas fa-sort ml-1"></i></a></th>
+                      </tr>
+                    </thead>
+                    <!-- Table head -->
+
+                    <!-- Table body -->
+                    <tbody>
+                      <tr class="text-center">
+                        <th scope="row">
+                          <input class="form-check-input" type="checkbox" id="checkbox1">
+                          <label for="checkbox1" class="label-table"></label>
+                        </th>
+                        <td>Desarmador Truper</td>
+                        <td>$15.00</td>
+                        <td>$13.00</td>
+                        <td>1,508</td>
+                        <td>$13,364.00</td>
+                      </tr>
+
+                      <tr class="text-center">
+                        <th scope="row">
+                          <input class="form-check-input" type="checkbox" id="checkbox1">
+                          <label for="checkbox1" class="label-table"></label>
+                        </th>
+                        <td>Desarmador Truper</td>
+                        <td>$15.00</td>
+                        <td>$13.00</td>
+                        <td>1,508</td>
+                        <td>$13,364.00</td>
+                      </tr>
+
+                      <tr class="text-center">
+                        <th scope="row">
+                          <input class="form-check-input" type="checkbox" id="checkbox1">
+                          <label for="checkbox1" class="label-table"></label>
+                        </th>
+                        <td>Desarmador Truper</td>
+                        <td>$15.00</td>
+                        <td>$13.00</td>
+                        <td>1,508</td>
+                        <td>$13,364.00</td>
+                      </tr>
+
+                      <tr class="text-center">
+                        <th scope="row">
+                          <input class="form-check-input" type="checkbox" id="checkbox1">
+                          <label for="checkbox1" class="label-table"></label>
+                        </th>
+                        <td>Desarmador Truper</td>
+                        <td>$15.00</td>
+                        <td>$13.00</td>
+                        <td>1,508</td>
+                        <td>$13,364.00</td>
+                      </tr>
+
+                      <tr class="text-center">
+                        <th scope="row">
+                          <input class="form-check-input" type="checkbox" id="checkbox1">
+                          <label for="checkbox1" class="label-table"></label>
+                        </th>
+                        <td>Desarmador Truper</td>
+                        <td>$15.00</td>
+                        <td>$13.00</td>
+                        <td>1,508</td>
+                        <td>$13,364.00</td>
+                      </tr>
+
+                    </tbody>
+                    <!-- Table body -->
+
+                  </table>
+                  <!-- Table -->
+
+                </div>
+
+                <hr class="my-0">
+
+                <!-- FOOTER DE LA TABLA -->
+                <div class="d-flex justify-content-between">
+
+                  <!-- Name -->
+                  <select class="mdb-select colorful-select dropdown-primary md-form hidden-md-down">
+                    <option value="" disabled>Numero de filas</option>
+                    <option value="1" selected>5 filas</option>
+                    <option value="2">25 filas</option>
+                    <option value="3">50 filas</option>
+                    <option value="4">100 filas</option>
+                  </select>
+
+                  <!-- Paginacion -->
+                  <nav class="my-4">
+                    <ul class="pagination pagination-circle pg-blue mb-0">
+
+                      <!--First-->
+                      <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link">Primero</a></li>
+
+                      <!-- Arrow left -->
+                      <li class="page-item disabled">
+                        <a class="page-link" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Anterior</span>
+                        </a>
+                      </li>
+
+                      <!-- Numbers -->
+                      <li class="page-item active"><a class="page-link">1</a></li>
+                      <li class="page-item"><a class="page-link">2</a></li>
+                      <li class="page-item"><a class="page-link">3</a></li>
+                      <li class="page-item"><a class="page-link">4</a></li>
+                      <li class="page-item"><a class="page-link">5</a></li>
+
+                      <!-- Arrow right -->
+                      <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Siguiente</span>
+                        </a>
+                      </li>
+
+                      <!-- First -->
+                      <li class="page-item clearfix d-none d-md-block"><a class="page-link">Último</a></li>
+
+                    </ul>
+                  </nav>
+                  <!-- Paginacion -->
+
+                </div>
+                <!-- FOOTER DE LA TABLA -->
+
+              </div>
+
+            </div>
+
+          </section>
+          <!-- CONTENEDOR DE LA TABLA DE PRODUCTOS MAS VENDIDOS -->
+
+        </div>
+        <!-- Card -->
+
+      </section>
+      <!-- CONTENEDOR DE PANEL DE PRODUCTOS MAS VENDIDOS Y GRAFICA DE VENTAS -->
+
+      <div class="row">
+
+        <!-- Panel -->
+        <div class="col-md-6 col-sm-12">
+          <div class="card mb-lg-0 mb-4">
+
+            <div class="card-header white-text text-center primary-color">
+              <h5 class="font-weight-500 my-1">Entradas a almacen</h5>
+            </div>
+
+            <div class="card-body">
+
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr class="text-center">
+                      <th class="font-weight-bold ">Estado</th>
+                      <th class="font-weight-bold ">Proveedor</th>
+                      <th class="font-weight-bold ">Usuario</th>
+                      <th class="font-weight-bold ">Fecha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-center">
+                      <td><span class="badge green">En proceso</span></td>
+                      <td>Lorem ipsum dolor</td>
+                      <td>John Doe</td>
+                      <td class="hour">
+                        <span class="grey-text">
+                          <i class="far fa-clock-o" aria-hidden="true"></i> 12/10/21
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="text-center">
+                      <td><span class="badge green">En proceso</span></td>
+                      <td>Lorem ipsum dolor</td>
+                      <td>John Doe</td>
+                      <td class="hour">
+                        <span class="grey-text">
+                          <i class="far fa-clock-o" aria-hidden="true"></i> 12/10/21
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="text-center">
+                      <td><span class="badge warning-color">Surtido Parcial</span></td>
+                      <td>Lorem ipsum dolor</td>
+                      <td>John Doe</td>
+                      <td class="hour">
+                        <span class="grey-text">
+                          <i class="far fa-clock-o" aria-hidden="true"></i> 12/10/21
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="text-center">
+                      <td><span class="badge danger-color">Cancelado</span></td>
+                      <td>Lorem ipsum dolor</td>
+                      <td>John Doe</td>
+                      <td class="hour">
+                        <span class="grey-text">
+                          <i class="far fa-clock-o" aria-hidden="true"></i> 12/10/21
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+            <button
+              class="btn btn btn-flat grey lighten-3 waves-effect font-weight-bold float-right btn-dash">
+              Ver Reporte Completo
+            </button>
+
+          </div>
+        </div>
+        <!-- Panel -->
+
+        <!-- Panel -->
+        <div class="col-md-6 col-sm-12">
+          <div class="card text-center mb-4 pt-4 pb-3 red accent-2 white-text">
+            <i class="fas fa-bell fa-3x mb-3"></i>
+            <h4 class="h4-responsive">2 mensajes importantes</h4>
+          </div>
+        </div>
+        <!-- Panel -->
+
+      </div>
+
+    </div>
+
+  </main>
+  <!-- CONTENIDO DEL DASHBOARD Y DE LAS VENTANAS A CARGAR -->
+
+  <!-- Footer -->
+  <footer class="page-footer pt-0 mt-5 rgba-stylish-light">
+
+    <!-- Copyright -->
+    <div class="footer-copyright py-3 text-center">
+      <div class="container-fluid">
+        © 2021 Copyright: <a href="#" target="_blank"> Ferretería Demo </a>
+      </div>
+    </div>
+
+  </footer>
+  <!-- Footer -->
+
+  <!-- SCRIPTS -->
+
+  <!-- JQuery -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/funciones_bootstrap/popper.min.js"></script>
+
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/funciones_bootstrap/bootstrap.js"></script>
+
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/funciones_bootstrap/mdb.min.js"></script>
+  
+  <!-- DATATABLES -->
+  <!-- <script type="text/javascript" src="js/addons/datatables.min.js"></script> -->
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+
+  <!-- FUNCIONES PERSONALIZADAS DEL DASHBOARD -->
+  <script type="text/javascript" src="js/dashboard/funciones_dashboard.js"></script>
+
+  <!-- Initializations -->
+  <script>
+
+    function cambiarVentana(ventana) {
+      let ventana_destino = ventana + '.html';
+      $("main").empty();
+      $("main").load(ventana_destino);
+    }
+
+    
+
+  </script>
+
+</body>
+
+</html>

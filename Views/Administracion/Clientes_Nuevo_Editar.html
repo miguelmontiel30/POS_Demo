@@ -1,0 +1,199 @@
+<div class="container-fluid">
+
+    <form class="card" method="">
+
+        <h3 class="text-center h3-responsive h3 my-3">
+            <i style="font-size: 1.6rem;" class="fas fa-address-book ml-1"></i>
+            Alta Clientes
+        </h3>
+
+        <div class="card-body px-4">
+
+            <!-- CONTENEDOR DE LOS DATOS DE CONTACTO -->
+            <div class="container-fluid p-0">
+
+                <h4 class="h4 h4-responsive mr-auto">
+                    <i class="far fa-address-card mr-2"></i>Datos del cliente
+                </h4>
+
+                <!-- CONTENEDOR CON LOS DATOS DEL NUEVO CLIENTE -->
+                <div class="row">
+
+                    <!-- Nombre -->
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <input class="form-control" type="text" id="txt_nombre" name="txt_nombre" value="">
+                            <label for="nombre">Nombre</label>
+                        </div>
+                    </div>
+                    <!-- Nombre -->
+
+                    <!-- Correo -->
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_correo">Correo</label>
+                            <input class="form-control" type="text" id="txt_correo" name="txt_correo" value="">
+                        </div>
+                    </div>
+                    <!-- Correo -->
+
+                    <!-- Telefono -->
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_tel">Telefono</label>
+                            <input class="form-control" type="text" id="txt_tel" name="txt_tel" value="">
+                        </div>
+                    </div>
+                    <!-- Telefono -->
+
+                    <!-- Cliente -->
+                    <div class="form-group col-md-3">
+                        <select class="mdb-select md-form">
+                            <option value="" disabled selected>Estado del Cliente</option>
+                            <option value="1">Habilitado</option>
+                            <option value="2">Deshabilitado</option>
+                        </select>
+                    </div>
+                    <!-- Cliente -->
+
+                </div>
+                <!-- CONTENEDOR CON LOS DATOS DEL NUEVO CLIENTE -->
+
+                <!-- CONTENEDOR DE DATOS BANCARIOS DEL CLIENTE -->
+                <div class="row">
+
+                    <!-- RFC -->
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_rfc">RFC</label>
+                            <input class="form-control" type="text" id="txt_rfc" name="txt_rfc" value="">
+                        </div>
+                    </div>
+                    <!-- RFC -->
+
+                    <!-- Cuentas Bancarias -->
+                    <div class="form-group col-md-3">
+                        <select class="mdb-select md-form" id="cuenta_bancaria" name="cuenta_bancaria">
+                            <option value="" disabled selected>Cuentas Bancarias Disponibles</option>
+                            <option value="">Ninguna cuenta</option>
+                        </select>
+                    </div>
+                    <!-- Cuentas Bancarias -->
+
+                </div>
+                <!-- CONTENEDOR DE DATOS BANCARIOS DEL CLIENTE -->
+
+            </div>
+            <!-- CONTENEDOR DE LOS DATOS DE CONTACTO -->
+
+            <!-- CONTENEDOR CON LOS DATOS DEL DOMICILIO DEL NUEVO CLIENTE -->
+            <div class="container-fluid p-0">
+
+                <h4 class="h4 h4-responsive mr-auto">
+                    <i class="far fa-address-card mr-2"></i>Domicilio del Cliente
+                </h4>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_calle">Calle</label>
+                            <input class="form-control" type="text" id="txt_calle" name="txt_calle" value="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_numExt">Numero Exterior</label>
+                            <input class="form-control" type="text" id="txt_numExt" name="txt_numExt" value="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_numInt">Número Interior</label>
+                            <input class="form-control" type="text" id="txt_numInt" name="txt_numInt" value="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_colonia">Colonia</label>
+                            <input class="form-control" type="text" id="txt_colonia" name="txt_colonia" value="">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_ciudad">Ciudad</label>
+                            <input class="form-control" type="text" id="txt_ciudad" name="txt_ciudad" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_delegacion">Delegación</label>
+                            <input class="form-control" type="text" id="txt_delegacion" name="txt_delegacion" value="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="txt_estado">Estado</label>
+                            <input class="form-control" type="text" id="txt_estado" name="txt_estado" value="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="md-form">
+                            <label for="">Código postal</label>
+                            <input class="form-control" type="text" id="txt_cp" name="txt_cp" value="">
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- CONTENEDOR CON LOS DATOS DEL DOMICILIO DEL NUEVO CLIENTE -->
+
+        </div>
+
+        <!-- CONTENEDOR DE LOS BOTONES -->
+        <div class="container-fluid">
+
+            <button class="btn btn-outline-success btn-block my-4 waves-effect z-depth-0" type="submit">
+                <i class="fas fa-save ml-1"></i>
+                Crear Nuevo Cliente
+            </button>
+
+            <button id="regresar" class="btn btn-outline-danger btn-block my-4 waves-effect z-depth-0" type="button">
+                <i class="fas fa-arrow-left ml-1"></i>
+                Regresar
+            </button>
+
+        </div>
+        <!-- CONTENEDOR DE LOS BOTONES -->
+
+    </form>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        // INICIALIZACIONES DE LAS FUNCIONES DE LOS INPUTS CON MDBOOTSTRAP
+        $('input').characterCounter();
+        $('.mdb-select').materialSelect();
+
+    });
+
+    $("#regresar").on('click', function (e) {
+        e.preventDefault();
+        cambiarVentana('Views/Administracion/Clientes');
+    });
+</script>

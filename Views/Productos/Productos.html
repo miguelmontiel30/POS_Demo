@@ -1,0 +1,262 @@
+<head>
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"> -->
+</head>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid card">
+
+    <div class="card-body">
+
+        <div class="container-fluid p-0 mb-3">
+
+            <h2 class="dark-text h2-responsive text-center">
+                <strong> <i style="font-size: 1.6rem;" class="fas fa-boxes ml-1"></i> Mis Productos</strong>
+            </h2>
+
+            <button class="my-4 btn blue-gradient btn-block btn-md" title="Nuevo"
+                onclick='editarProductos("Views/Productos/Productos_Nuevo_Editar.php");'>
+                <i class="fas fa-plus-circle mr-1"></i>
+                Nuevo Producto
+            </button>
+
+            <p class="pb-4 d-none">
+                En el módulo NUEVA CATEGORÍA usted podrá registrar las categorías que servirán para agregar productos y
+                también podrá ver los productos que pertenecen a una categoría determinada. Además de lo antes
+                mencionado,
+                puede actualizar los datos de las categorías, realizar búsquedas de categorías o eliminarlas si así lo
+                desea.
+            </p>
+        </div>
+
+        <div class="table-responsive">
+            <table id="table_productos" class="table table-bordered table-hover">
+
+                <thead>
+                    <tr class="text-center" style="font-size: 1.8rem; font-weight: bold;">
+                        <th>Nombre del Producto</th>
+                        <th>Existencias/Stock Minimo</th>
+                        <th>Categoria</th>
+                        <th>Proveedor</th>
+                        <th>Precio (Compra/Venta)</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+
+                <tbody id="datos_table_productos">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+
+<script>
+
+
+    $(document).ready(function () {
+        const es = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        };
+        // $('.dataTables_length').addClass('bs-select');
+
+        $('input').characterCounter();
+        $('.mdb-select').materialSelect();
+
+        cargarProductos();
+
+        $('#table_productos').dataTable({
+            language: es
+        })
+
+    });
+
+
+
+    function eliminarUsuario(id_usuario) {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-warning',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: '¿Desea eliminar este Usuario del sistema?',
+            icon: 'question',
+            confirmButtonText: 'Eliminar <i class="far fa-trash"></i> ',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar <i class="far fa-ban"></i>'
+        }).then((result) => {
+            if (result['isConfirmed']) {
+
+                $.ajax({
+                    method: "POST",
+                    url: "./Controllers/Administracion/Usuarios.php",
+                    data: {
+                        funcion: 'eliminar_usuario',
+                        id_usuario: id_usuario
+                    }
+                }).done(function (respuesta_servidor) {
+                    // console.log(respuesta_servidor);
+                    let respuesta_usuario = JSON.parse(respuesta_servidor);
+
+                    if (respuesta_usuario.respuesta == 'Eliminado Correctamente') {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Correcto!',
+                            text: 'Se ha eliminado el registro'
+                        });
+
+                        cargarUsuarios();
+
+                    }
+                })
+
+            }
+        })
+    }
+
+    function editarUsuario(ventana_destino) {
+        $("main").load(ventana_destino);
+    }
+
+    function cargarProductos() {
+
+        // tabla_productos.append(
+        //                 '<tr  class="text-center" style="vertical-align: middle;">' +
+        //                 '<td><strong>' + producto.nombre_producto + '</strong><br>(' + producto.modelo_producto + ')</td>' +
+        //                 '<td>' + producto.stock_existencias + ' / ' + producto.stock_minimo + '</td>' +
+        //                 '<td><span class="badge badge-primary">' + producto.nombre_categoria + '</span></td>' +
+        //                 '<td>' + producto.nombre_proveedor + '</td>' +
+        //                 '<td>$' + producto.precio_compra + ' / <strong>$' + producto.precio_venta + '</strong></td>' +
+        //                 '<td>' +
+        //                 '<button class="btn btn-primary btn-sm text-center" onclick="editarProducto(\'Views/Productos/Producto_Nuevo_Editar.php?id_producto=' + producto.id_producto + '\'); return false;"> ' +
+        //                 '<i class="fas fa-pencil"></i> Editar' +
+        //                 '</button>' +
+        //                 '</td>' +
+        //                 '<td>' +
+        //                 '<button class="btn btn-danger btn-sm text-center" onclick="eliminarProducto(\'' + producto.id_producto + '\'); return false;">' +
+        //                 '<i class="fas fa-trash"></i> Eliminar ' +
+        //                 '</button >' +
+        //                 '</td>' +
+        //                 '<tr>');
+
+        // let tabla_pagos = $('#table_productos').DataTable({
+        //     "destroy": true,
+        //     'ajax': {
+        //         method: "POST",
+        //         url: "./Controllers/Productos/Producto.php",
+        //         data: {
+        //             funcion: 'consultar_productos'
+        //         }
+        //     },
+
+        // "columns": [
+        //     {
+        //         "datos_productos.productos": "precio_venta",
+        //         "render": function (data, type, row, meta) {
+        //             console.log(data);
+        //             // return '<input class="form-check-input input_camion" type="checkbox" nombre_proveedor="' + row.nombre_proveedor + '" clave_proveedor="' + row.ClaveProveedor + '" id_detalle_oc="' + row.IdDetalleOC + '" value="' + data + '" id="">';
+        //         }
+        //     },                
+        //     { "datos_productos.productos": "precio_venta" },
+        //     { "datos_productos.productos": "precio_venta" },
+        //     { "datos_productos.productos": "precio_venta" },
+        //     { "datos_productos.productos": "precio_venta" },
+        //     { "datos_productos.productos": "precio_venta" },
+        //     { "datos_productos.productos": "precio_venta" }
+        //     // { "data": "nombre_proveedor" },
+        //     // { "data": "fecha" },
+        //     // {
+        //     //     "data": "empaque",
+        //     //     "render": function (data, type, row, meta) {
+        //     //         return '<strong>' + row.Cantidad + ' </strong>' + data
+        //     //     }
+        //     // },
+        //     // { "data": "Kg" },
+        //     // { "data": "producto" }                
+        // ],
+        //     "language": es
+        // });
+
+
+        // VACIAMOS LA TABLA DE CONTENIDO
+        $("#datos_table_productos").empty();
+
+        $.ajax({
+            method: "POST",
+            url: "./Controllers/Productos/Producto.php",
+            data: {
+                funcion: 'consultar_productos'
+            }
+        }).done(function (respuesta_servidor) {
+            // console.log(respuesta_servidor);
+            let datos_productos = JSON.parse(respuesta_servidor);
+            // console.log(datos_usuarios);
+
+            if (datos_productos.estado == "Tiene productos") {
+
+                datos_productos.productos.forEach(producto => {
+
+                    $('#datos_table_productos').append(
+                        '<tr  class="text-center" style="vertical-align: middle;">' +
+                        '<td><strong>' + producto.nombre_producto + '</strong><br>(' + producto.modelo_producto + ')</td>' +
+                        '<td>' + producto.stock_existencias + ' / ' + producto.stock_minimo + '</td>' +
+                        '<td><span class="badge badge-primary">' + producto.nombre_categoria + '</span></td>' +
+                        '<td>' + producto.nombre_proveedor + '</td>' +
+                        '<td>$' + producto.precio_compra + ' / <strong>$' + producto.precio_venta + '</strong></td>' +
+                        '<td>' +
+                        '<button class="btn btn-primary btn-sm text-center" onclick="editarProducto(\'Views/Productos/Producto_Nuevo_Editar.php?id_producto=' + producto.id_producto + '\'); return false;"> ' +
+                        '<i class="fas fa-pencil"></i> Editar' +
+                        '</button>' +
+                        '</td>' +
+                        '<td>' +
+                        '<button class="btn btn-danger btn-sm text-center" onclick="eliminarProducto(\'' + producto.id_producto + '\'); return false;">' +
+                        '<i class="fas fa-trash"></i> Eliminar ' +
+                        '</button >' +
+                        '</td>' +
+                        '<tr>');
+
+                });
+
+            } else {
+                console.log('No tiene productos');
+            }
+        });
+    }
+
+
+    $("#regresar").on('click', function (e) {
+        e.preventDefault();
+        cambiarVentana('Views/Administracion/Usuarios');
+    });
+
+
+</script>

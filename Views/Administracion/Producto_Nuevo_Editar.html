@@ -1,0 +1,293 @@
+<!-- CONTENEDOR GENERAL DE LA INTERFAZ -->
+<div class="container-fluid">
+
+    <!-- TARJETA DE NUEVO PRODCUTO -->
+    <form class="card">
+
+        <h3 class="text-center h3-responsive h3 my-3">
+            <i style="font-size: 1.6rem;" class="fas fa-boxes-alt ml-1"></i>
+            Alta Producto
+        </h3>
+
+        <!-- CONTENEDOR DEL LOS INPUTS -->
+        <div class="card-body px-4">
+
+            <!-- CONTENEDOR DE LOS DATOS DE PRODUCTO -->
+            <div class="container-fluid p-0">
+
+                <h4 class="h4 h4-responsive mr-auto">
+                    <i class="fas fa-box mr-2"></i>Información del producto
+                </h4>
+
+                <div class="row">
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+
+                            <!-- Nombre -->
+                            <div class="col-12 col-md-6">
+                                <div class="md-form">
+                                    <label for="producto_nombre">Nombre</label>
+                                    <input type="text" class="form-control" name="" length="97">
+                                </div>
+                            </div>
+                            <!-- Nombre -->
+
+                            <!-- Modelo -->
+                            <div class="col-12 col-md-6">
+                                <div class="md-form">
+                                    <label for="">Modelo</label>
+                                    <input type="text" class="form-control" name="" id="" length="20">
+                                </div>
+                            </div>
+                            <!-- Modelo -->
+
+                            <!-- Stock o existencias -->
+                            <div class="col-12 col-md-4">
+                                <div class="md-form">
+                                    <label for="">Stock o existencias</label>
+                                    <input type="number" class="form-control" name="" id="" length="20">
+                                </div>
+                            </div>
+                            <!-- Stock o existencias -->
+
+                            <!-- Stock mínimo -->
+                            <div class="col-12 col-md-4">
+                                <div class="md-form">
+                                    <label for="">Stock mínimo</label>
+                                    <input type="number" class="form-control" name="" id="" length="9">
+                                </div>
+                            </div>
+                            <!-- Stock mínimo -->
+
+                            <!-- Presentación del producto -->
+                            <div class="col-12 col-md-4 form-group">
+                                <select class="mdb-select md-form" name="" id="">
+                                    <option value="" selected="">Presentación del producto</option>
+                                    <option value="">Unidad</option>
+                                    <option value="">Libra</option>
+                                    <option value="">Kilogramo</option>
+                                    <option value="">Caja</option>
+                                    <option value="">Paquete</option>
+                                    <option value="">Lata</option>
+                                    <option value="">Galon</option>
+                                    <option value="">Botella</option>
+                                    <option value="">Tira</option>
+                                    <option value="">Sobre</option>
+                                    <option value="">Bolsa</option>
+                                    <option value="">Saco</option>
+                                    <option value="">Tarjeta</option>
+                                    <option value="">Otro</option>
+                                </select>
+                            </div>
+                            <!-- Presentación del producto -->
+
+                            <!-- Precio de compra -->
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="md-form">
+                                    <label for="">Precio de compra</label>
+                                    <input type="number" class="form-control" name="" value="" id="" length="25">
+                                </div>
+                            </div>
+                            <!-- Precio de compra -->
+
+                            <!-- Precio de venta -->
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="md-form">
+                                    <label for="">Precio de venta</label>
+                                    <input type="number" class="form-control" name="" value="" id="" length="25">
+                                </div>
+                            </div>
+                            <!-- Precio de venta -->
+
+                            <!-- Precio de mayoreo -->
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="md-form">
+                                    <label for="">Precio de mayoreo</label>
+                                    <input type="number" class="form-control" name="" value="" id="" length="25">
+                                </div>
+                            </div>
+                            <!-- Precio de mayoreo -->
+
+                            <!-- Descuento (%) en venta -->
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="md-form">
+                                    <label for="producto_descuento">Descuento (%) en venta</label>
+                                    <input type="number" class="form-control" pattern="[0-9]{1,2}" name="" id=""
+                                        maxlength="2">
+                                </div>
+                            </div>
+                            <!-- Descuento (%) en venta -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- CONTENEDOR DE LOS DATOS DE PRODUCTO -->
+
+            <!-- CONTENEDOR DE LOS DATOS DE VENCIMIENTO DEL PRODUCTO -->
+            <div class="container-fluid p-0 mt-3">
+
+                <h4 class="h4 h4-responsive mr-auto">
+                    <i class="fas fa-calendar-alt mr-2"></i>Vencimiento del producto
+                </h4>
+
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <!-- RADIO BUTTONS -->
+                        <div class="col-12 col-md-6">
+
+                            <div class="form-check mt-3">
+                                <input type="radio" class="form-check-input" id="materialGroupExample1"
+                                    name="groupOfMaterialRadios">
+                                <label class="form-check-label" for="materialGroupExample1">Si vence</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="materialGroupExample2"
+                                    name="groupOfMaterialRadios" checked>
+                                <label class="form-check-label" for="materialGroupExample2">No vence</label>
+                            </div>
+
+                        </div>
+                        <!-- RADIO BUTTONS -->
+
+                        <!-- Fecha de vencimiento -->
+                        <div class="col-12 col-md-6 mt-3">
+                            <div class="form-group bmd-form-group is-filled">
+                                <label for="" class="bmd-label-static">Fecha de vencimiento</label>
+                                <input type="date" class="form-control" name="" id="" value="">
+                            </div>
+                        </div>
+                        <!-- Fecha de vencimiento -->
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- CONTENEDOR DE LOS DATOS DE VENCIMIENTO DEL PRODUCTO -->
+
+            <!-- CONTENEDOR DE LOS DATOS DE Proveedor, Categoría Y Estado -->
+            <div class="container-fluid p-0 mt-3">
+
+                <h4 class="h4 h4-responsive mr-auto">
+                    <i class="fas fa-truck-loading mr-2"></i>Proveedor, Categoría Y Estado
+                </h4>
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <!-- Proveedor -->
+                        <div class="col-12 col-md-4">
+                            <select class="mdb-select md-form" name="" id="">
+                                <option value="" selected="">Seleccione un Proveedor</option>
+                                <option value="">Pretul</option>
+                                <option value="">Truper</option>
+                                <option value="">Ferrepat</option>
+                                <option value="">Servicreat</option>
+                            </select>
+                        </div>
+                        <!-- Proveedor -->
+
+                        <!-- Categoría -->
+                        <div class="col-12 col-md-4">
+                            <select class="mdb-select md-form" name="" id="">
+                                <option value="" selected="">Seleccione una Categoría</option>
+                                <option value="">Baños y Plomeria</option>
+                                <option value="">Herramientas</option>
+                                <option value="">Hogar y Jardin</option>
+                                <option value="">Material Electrico</option>
+                                <option value="">MERCADO</option>
+                                <option value="">Tornillos</option>
+                                <option value="">Lácteos</option>
+                            </select>
+                        </div>
+                        <!-- Categoría -->
+
+                        <!-- Estado -->
+                        <div class="col-12 col-md-4">
+                            <select class="mdb-select md-form" name="producto_estado_reg" id="producto_estado">
+                                <option value="Habilitado" selected>Estado del producto</option>
+                                <option value="Habilitado">Habilitado</option>
+                                <option value="Deshabilitado">Deshabilitado</option>
+                            </select>
+                        </div>
+                        <!-- Estado -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- CONTENEDOR DE LOS DATOS DE Proveedor, Categoría Y Estado -->
+
+            <!-- CONTENEDOR DE LA SUBIDA DE IMAGEN DEL PRODUCTO -->
+            <div class="container-fluid p-0 mt-3">
+
+                <h4 class="h4 h4-responsive mr-auto">
+                    <i class="fas fa-image mr-2"></i>Foto o imagen del producto
+                </h4>
+
+                <div class="md-form">
+
+                    <div class="file-field big">
+                        
+                        <a class="btn-floating btn-lg primary-color-dark mt-0 float-left">
+                            <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
+                            <input type="file" multiple>
+                        </a>
+
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Subir Imagen">
+                        </div>
+
+                    </div>
+
+                    <small class="text-muted ml-3">
+                        Tipos de archivos permitidos: JPG, JPEG, PNG. Tamaño máximo 2MB.
+                        Resolución recomendada 300px X 300px o superior manteniendo el aspecto cuadrado
+                        (1:1)
+                    </small>
+                </div>
+
+            </div>
+            <!-- CONTENEDOR DE LA SUBIDA DE IMAGEN DEL PRODUCTO -->
+
+        </div>
+        <!-- CONTENEDOR DEL LOS INPUTS -->
+
+        <!-- CONTENEDOR DEL BOTON DE GUARDAR PRODUCTO -->
+        <div class="container-fluid">
+            <button class="btn btn-outline-success btn-block my-4 waves-effect z-depth-0" type="submit">
+                <i class="fas fa-save ml-1"></i>
+                Crear Nuevo Producto
+            </button>
+        </div>
+        <!-- CONTENEDOR DEL BOTON DE GUARDAR PRODUCTO -->
+
+    </form>
+    <!-- TARJETA DE NUEVO PRODCUTO -->
+
+</div>
+<!-- CONTENEDOR GENERAL DE LA INTERFAZ -->
+
+<script type="text/javascript" src="js/dashboard/funciones_dashboard.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        // INICIALIZACIONES DE LAS FUNCIONES DE LOS INPUTS CON MDBOOTSTRAP
+        $('input').characterCounter();
+        $('.mdb-select').materialSelect();
+        $('.file-upload').file_upload();
+
+    });
+</script>

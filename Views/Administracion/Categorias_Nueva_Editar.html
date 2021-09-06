@@ -1,0 +1,154 @@
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <h2 class="h2-responsive text-center card-title">
+                <strong> <i style="font-size: 1.6rem;" class="fas fa-tags ml-1"></i> Nueva Categoría</strong>
+            </h2>
+
+
+            <!-- FORMULARIO DE REGISTRO DE CATEGORIAS -->
+            <div class="container mt-4">
+
+                <h4 class="text-left">
+                    <i class="far fa-tasks ml-1"></i>
+                    Datos de la Categoría
+                </h4>
+
+                <!-- Form -->
+                <form id="form_categoria" class="text-center" style="color: #757575;" action="#!">
+
+                    <!-- NOMBRE Y ESTADO DE LA CATEGORIA -->
+                    <div class="row">
+
+                        <!-- Nombre de la Categoría -->
+                        <div class="col-md-6 col-12">
+                            <div class="md-form input-with-post-icon">
+                                <i class="fas fa-tags input-prefix"></i>
+                                <input type="text" name="nombre_categoria" id="nombre_categoria" length="20"
+                                    class="form-control validate" required>
+                                <label for="nombre_categoria" data-error="Incorrecto" data-success="Correcto">Nombre de
+                                    la Categoría</label>
+                            </div>
+                        </div>
+
+                        <!-- ESTADO DE LA CATEGORIA -->
+                        <div class="col-md-6 col-12">
+                            <select class="mdb-select md-form validate" name="estado_categoria" id="estado_categoria"
+                                required>
+                                <option value="" disabled selected>Estado de la Categoria</option>
+                                <option value="1">Habilitado</option>
+                                <option value="2">Deshabilitado</option>
+                            </select>
+                        </div>
+
+                        <!-- DESCRIPCION de la Categoría -->
+                        <div class="col-12">
+                            <div class="md-form">
+                                <textarea name="descripcion_categoria" id="descripcion_categoria"
+                                    class="form-control md-textarea validate" length="30" rows="1"></textarea>
+                                <label for="descripcion_categoria">Descripción de la Categoría</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- NOMBRE Y ESTADO DE LA CATEGORIA -->
+
+                    <button class="btn btn-outline-success btn-block my-4 waves-effect z-depth-0" type="submit">
+                        <i class="fas fa-save ml-1"></i>
+                        Crear Nueva Categoria
+                    </button>
+
+                    <button id="regresar" class="btn btn-outline-danger btn-block my-4 waves-effect z-depth-0"
+                        type="button">
+                        <i class="fas fa-arrow-left ml-1"></i>
+                        Regresar
+                    </button>
+
+                </form>
+                <!-- Form -->
+
+            </div>
+            <!-- FORMULARIO DE REGISTRO DE CATEGORIAS -->
+
+        </div>
+
+    </div>
+
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+
+<script>
+
+    $(document).ready(function () {
+
+        // INICIALIZAMOS LOS COMPONENTES 
+        $('input, textarea').characterCounter();
+        $('.mdb-select').materialSelect();
+
+        $("#form_categoria").on('submit', function (event) {
+            event.preventDefault();
+            insertarCategoria();
+        });
+
+    });
+
+
+    function insertarCategoria() {
+
+        // OBTENEMOS LOS DATOS QUE VAMOS A INSERTAR
+        let nombre_categoria = $("#nombre_categoria").val();
+        let estado_categoria = $("#estado_categoria").val();
+
+        let descripcion_categoria = ($("#descripcion_categoria").val() == '' || $("#descripcion_categoria").val() == null)
+            ? 'Sin Descripcion'
+            : $("#descripcion_categoria").val();
+
+        $.ajax({
+            method: "POST",
+            url: "./Controllers/Administracion/Categorias.php",
+            data: {
+                funcion: 'insertar_nueva_categoria',
+                nombre_categoria: nombre_categoria,
+                descripcion_categoria: descripcion_categoria,
+                estado_categoria: estado_categoria
+            }
+        }).done(function (respuesta_servidor) {
+            console.log(respuesta_servidor);
+            let respuesta_categoria = JSON.parse(respuesta_servidor);
+
+            if (respuesta_categoria.respuesta == 'Insertado Correctamente') {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Correcto!',
+                    text: 'La Nueva Categoria ha sido dada de alta'
+                });
+
+                setTimeout(() => {
+                    cambiarVentana('Views/Administracion/Categorias');
+                }, 1500);
+
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Vaya!',
+                    text: 'No se ha insertado correctamente, verifique que los datos sean correctos.'
+                });
+            }
+        });
+    }
+
+
+    $("#regresar").on('click', function (e) {
+        e.preventDefault();
+        cambiarVentana('Views/Administracion/Categorias');
+    });
+
+
+
+</script>

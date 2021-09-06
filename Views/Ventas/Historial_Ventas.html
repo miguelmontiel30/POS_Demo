@@ -1,0 +1,119 @@
+<style>
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_desc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:before {
+        bottom: .5em;
+    }
+</style>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid">
+
+    <div class="card">
+        <div class="card-body">
+
+            <h3 class="text-center h3-responsive h3 my-3">
+                <i style="font-size: 1.6rem;" class="fas fa-cart-plus ml-1"></i>
+                Historial de Ventas
+            </h3>
+
+
+            <table id="dtBasicExample" class="table table-striped table-hover table-bordered table-sm" cellspacing="0"
+                width="100%">
+                <thead class="text-center font-weight-bold">
+                    <tr>
+                        <th class="th-sm">No. Venta</th>
+                        <th class="th-sm">Vendedor</th>
+                        <th class="th-sm">Cliente</th>
+                        <th class="th-sm">Fecha</th>
+                        <th class="th-sm">No. Productos</th>
+                        <th class="th-sm">Total</th>
+                        <th class="th-sm">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
+                                    <button type="button" class="btn btn-warning" title="Editar">
+                                        <i class="far fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" title="Eliminar">
+                                        <i class="far fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" title="Ver Factura">
+                                        <i class="far fa-file-invoice-dollar" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-info" title="Ver Ticket">
+                                        <i class="far fa-receipt" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
+                                    <button type="button" class="btn btn-warning" title="Editar">
+                                        <i class="far fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" title="Eliminar">
+                                        <i class="far fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" title="Ver Factura">
+                                        <i class="far fa-file-invoice-dollar" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-info" title="Ver Ticket">
+                                        <i class="far fa-receipt" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="table-warning text-center font-weight-bold">
+                    <th class="th-sm">No. Venta</th>
+                    <th class="th-sm">Vendedor</th>
+                    <th class="th-sm">Cliente</th>
+                    <th class="th-sm">Fecha</th>
+                    <th class="th-sm">No. Productos</th>
+                    <th class="th-sm">Total</th>
+                    <th class="th-sm">Opciones</th>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+
+<script>
+    // INICIALIZAMOS LOS COMPONENTES A UTILIZAR    
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+</script>

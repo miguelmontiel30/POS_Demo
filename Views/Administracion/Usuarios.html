@@ -1,0 +1,210 @@
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid card">
+
+    <div class="card-body">
+
+        <div class="container-fluid p-0 mb-3">
+
+            <h2 class="dark-text h2-responsive text-center">
+                <strong> <i style="font-size: 1.6rem;" class="fas fa-users ml-1"></i> Usuarios</strong>
+            </h2>
+
+            <button class="my-4 btn blue-gradient btn-block btn-md" title="Nuevo"
+                onclick='editarUsuario("Views/Administracion/Usuarios_Nuevo_Editar.php");'>
+                <i class="fas fa-plus-circle mr-1"></i>
+                Nuevo Usuario
+            </button>
+
+            <p class="pb-4 d-none">
+                En el módulo NUEVA CATEGORÍA usted podrá registrar las categorías que servirán para agregar productos y
+                también podrá ver los productos que pertenecen a una categoría determinada. Además de lo antes
+                mencionado,
+                puede actualizar los datos de las categorías, realizar búsquedas de categorías o eliminarlas si así lo
+                desea.
+            </p>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+
+                <thead>
+                    <tr class="text-center" style="font-size: 1.8rem; font-weight: bold;">
+                        <th>Nombre</th>
+                        <th>Cargo</th>
+                        <th>Estado</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+
+                <tbody id="table_usuarios">
+                    <tr class="text-center" style="vertical-align: middle;">
+                        <td>
+                            Miguel
+                        </td>
+                        <td>
+                            Administrador
+                        </td>
+                        <td>
+                            <span class="badge badge-danger p-1">
+                                Deshabilitado
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm text-center"
+                                onclick="cambiarVentana('Views/Administracion/Usuarios_Nuevo_Editar'); return false;">
+                                <i class="fas fa-pencil ml-2"></i> Editar
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm text-center" data-toggle="modal"
+                                data-target="#confirm-delete">
+                                <i class="fas fa-trash ml-2"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr class="text-center" style="vertical-align: middle;">
+                        <td>
+                            Aceros
+                        </td>
+                        <td>
+                            Vendedor
+                        </td>
+                        <td>
+                            <span class="badge badge-primary p-1">
+                                Habilitado
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm text-center"
+                                onclick="cambiarVentana('Views/Administracion/Usuarios_Nuevo_Editar'); return false;">
+                                <i class="fas fa-pencil ml-2"></i> Editar
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm text-center" data-toggle="modal"
+                                data-target="#confirm-delete">
+                                <i class="fas fa-trash ml-2"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+
+<script>
+    $(document).ready(function () {
+        $('input').characterCounter();
+        $('.mdb-select').materialSelect();
+
+        cargarUsuarios();
+    });
+
+    function eliminarUsuario(id_usuario) {
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-warning',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: '¿Desea eliminar este Usuario del sistema?',
+            icon: 'question',
+            confirmButtonText: 'Eliminar <i class="far fa-trash"></i> ',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar <i class="far fa-ban"></i>'
+        }).then((result) => {
+            if (result['isConfirmed']) {
+
+                $.ajax({
+                    method: "POST",
+                    url: "./Controllers/Administracion/Usuarios.php",
+                    data: {
+                        funcion: 'eliminar_usuario',
+                        id_usuario: id_usuario
+                    }
+                }).done(function (respuesta_servidor) {
+                    // console.log(respuesta_servidor);
+                    let respuesta_usuario = JSON.parse(respuesta_servidor);
+
+                    if (respuesta_usuario.respuesta == 'Eliminado Correctamente') {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Correcto!',
+                            text: 'Se ha eliminado el registro'
+                        });
+
+                        cargarUsuarios();
+
+                    }
+                })
+
+            }
+        })
+    }
+
+    function editarUsuario(ventana_destino) {
+        $("main").load(ventana_destino);
+    }
+
+    function cargarUsuarios() {
+
+        // VACIAMOS LA TABLA DE CONTENIDO
+        $("#table_usuarios").empty();
+
+        $.ajax({
+            method: "POST",
+            url: "./Controllers/Administracion/Usuarios.php",
+            data: {
+                funcion: 'consultar_usuarios'
+            }
+        }).done(function (respuesta_servidor) {
+            // console.log(respuesta_servidor);
+            let datos_usuarios = JSON.parse(respuesta_servidor);
+            // console.log(datos_usuarios);
+
+            if (datos_usuarios.estado = "Tiene usuarios") {
+
+                datos_usuarios.usuarios.forEach(usuario => {
+
+                    $("#table_usuarios").append(
+                        '<tr  class="text-center" style="vertical-align: middle;">' +
+                        '<td>' + usuario.nombre + '</td>' +
+                        '<td>' + usuario.tipo_usuario + '</td>' +
+                        '<td><span class="badge badge-success">' + usuario.estado + '</span></td>' +
+                        '<td>' +
+                        '<button class="btn btn-primary btn-sm text-center" onclick="editarUsuario(\'Views/Administracion/Usuarios_Nuevo_Editar.php?id_usuario=' + usuario.id_usuario + '\'); return false;"> ' +
+                        '<i class="fas fa-pencil"></i> Editar' +
+                        '</button>' +
+                        '</td>' +
+                        '<td>' +
+                        '<button class="btn btn-danger btn-sm text-center" onclick="eliminarUsuario(\'' + usuario.id_usuario + '\'); return false;">' +
+                        '<i class="fas fa-trash"></i> Eliminar ' +
+                        '</button >' +
+                        '</td>' +
+                        '<tr>');
+                });
+
+            } else {
+
+            }
+        });
+    }
+
+
+    $("#regresar").on('click', function (e) {
+        e.preventDefault();
+        cambiarVentana('Views/Administracion/Usuarios');
+    });
+</script>

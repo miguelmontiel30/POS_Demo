@@ -1,0 +1,222 @@
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+<div class="container-fluid">
+
+    <form action="" class="card">
+
+        <h3 class="text-center h3-responsive h3 my-3">
+            <i style="font-size: 1.6rem;" class="fas fa-cart-plus ml-1"></i>
+            Nueva Compra
+        </h3>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <!-- CONTENEDOR DE BUSCAR Y TABLA DE PRODUCTOS AGREGADOS -->
+                <div class="col-12 col-lg-9">
+
+                    <p class="text-center">
+                        Ingrese el nombre del producto y luego haga clic en 'AGREGAR PRODUCTO' para cargar los datos
+                        de la compra a realizar.
+                    </p>
+
+                    <!-- FORM DE BUSQUEDA DE PRODUCTOS -->
+                    <div class="row align-items-center">
+
+                        <!-- BUSCAR -->
+                        <div class="col-12 col-md-8">
+                            <div class="md-form">
+                                <input type="search" id="form-autocomplete" class="form-control mdb-autocomplete">
+                                <label for="" class="">Buscar Producto</label>
+                            </div>
+                        </div>
+                        <!-- BUSCAR -->
+
+                        <!-- AGREGAR PRODUCTO -->
+                        <div class="col-12 col-md-4">
+                            <button type="button" class="btn btn-md btn-primary" onclick="agregar_producto()">
+                                <i class="far fa-cart-plus"></i> Agregar Producto
+                            </button>
+                        </div>
+                        <!-- AGREGAR PRODUCTO -->
+
+                    </div>
+                    <!-- FORM DE BUSQUEDA DE PRODUCTOS -->
+
+                    <hr>
+
+                    <!-- TABLA DE LOS PRODUCTOS AGREGADOS -->
+                    <div class="table-responsive">
+
+                        <table class="table table-hover table-bordered">
+
+                            <thead>
+                                <tr class="text-center">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Subtotal</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class="text-center table-warning">
+                                    <th colspan="7">No hay productos agregados</th>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <!-- TABLA DE LOS PRODUCTOS AGREGADOS -->
+
+                </div>
+                <!-- CONTENEDOR DE BUSCAR Y TABLA DE PRODUCTOS AGREGADOS -->
+
+                <!-- CONTENEDO DE LOS DATOS DE LA COMPRA -->
+                <div class="col-12 col-lg-3">
+
+                    <h3 class="text-center text-uppercase">Datos de la compra</h3>
+                    <hr>
+
+                    <form>
+
+                        <div class="md-form">
+                            <input type="text" id="date-picker-example"
+                                class="form-control datepicker">
+                            <label for="date-picker-example">Seleccione una fecha</label>
+                        </div>
+
+                        <!-- PROVEEDOR -->
+                        <select class="mdb-select md-form" name="" id="">
+                            <option value="" disabled selected>Proveedor</option>
+                            <option value="">Pretul</option>
+                            <option value="">Truper</option>
+                            <option value="">Ferrepat</option>
+                            <option value="">Servicreat</option>
+                            <option value="">YAPPA</option>
+                        </select>
+                        <!-- PROVEEDOR -->
+
+                        <!-- ALMACEN -->
+                        <select class="mdb-select md-form" name="" id="">
+                            <option value="" disabled selected>Almacén</option>
+                            <option value="">Ferretería</option>
+                            <option value="">Sucursal 2</option>
+                            <option value="">Sucursal 3</option>
+                        </select>
+                        <!-- ALMACEN -->
+
+                        <!-- DATOS DE LA VENTA -->
+                        <ul class="list-group list-unstyled">
+
+                            <!-- SUBTOTAL -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Subtotal
+                                <span class="badge badge-pill badge-primary">$0.00 USD</span>
+                            </li>
+                            <!-- SUBTOTAL -->
+
+                            <!-- IVA -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                IVA (13%)
+                                <span class="badge badge-pill badge-default">$0.00 USD</span>
+                            </li>
+                            <!-- IVA -->
+
+                            <li>
+                                <hr>
+                            </li>
+
+                            <!-- TOTAL -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Total
+                                <span class="badge badge-pill badge-success">$0.00 USD</span>
+                            </li>
+                            <!-- TOTAL -->
+                            
+                        </ul>
+                        <!-- DATOS DE LA VENTA -->
+
+                    </form>
+                </div>
+                <!-- CONTENEDO DE LOS DATOS DE LA COMPRA -->
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+</div>
+<!-- CONTENEDOR GENERAL DE LA VISTA -->
+
+<script>
+
+    // INICIALIZAMOS LOS COMPONENTES A UTILIZAR    
+    $(document).ready(function () {
+        $('.datepicker').pickadate();
+        $('.mdb-select').materialSelect();
+    });
+
+    var states = [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illnois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
+    ];
+
+    $('#form-autocomplete').mdbAutocomplete({
+        data: states
+    });
+</script>
